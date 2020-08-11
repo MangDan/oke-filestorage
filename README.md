@@ -2,11 +2,11 @@
 
 #### FSS 시스템 생성 
 생성을 위해 다음 5가지 정보가 필요.
->> * FSS Name
->> * Export Path
->> * Mount Target
->> * VCN (Virtual Cloud Network)
->> * Subnet
+> * FSS Name
+> * Export Path
+> * Mount Target
+> * VCN (Virtual Cloud Network)
+> * Subnet
 
 * FSS 생성 화면
 ![](images/oci_create_fss.png)
