@@ -1,0 +1,8 @@
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: drupal-fss-sc
+provisioner: oracle.com/oci-fss
+parameters:
+  # Insert mount target from the FSS here
+  mntTargetId: ocid1.mounttarget.oc1.ap_seoul_1.aaaaaa4np2spflc7nfrw4llqojxwiotboawxgzlpovwc2mjnmfsc2mia

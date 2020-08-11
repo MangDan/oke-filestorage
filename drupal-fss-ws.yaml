@@ -1,0 +1,48 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: drupal-fss-pvc-svc
+  namespace: drupal-fss
+  labels:
+    app: drupal-fss-ws 
+  annotations:
+    service.beta.kubernetes.io/oci-load-balancer-backend-protocol: "HTTP"
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    protocol: TCP 
+    targetPort: 80
+  selector:
+    app: drupal-fss-ws
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: drupal-fss-ws 
+  name: drupal-fss-ws
+  namespace: drupal-fss
+spec:
+  selector:
+    matchLabels:
+      app: drupal-fss-ws
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: drupal-fss-ws 
+    spec:
+      containers:
+      - name: drupal-fss-ws 
+        image: nginx
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: nfs-mount
+          mountPath: "/usr/share/nginx/html/"
+      volumes:
+      - name: nfs-mount
+        persistentVolumeClaim:
+          claimName: drupal-fss-pvc
+          readOnly: false
